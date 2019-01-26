@@ -1,7 +1,9 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { AppLoading, Asset, Font, Icon, Camera } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import HomeScreen from './screens/HomeScreen';
+import CameraScreen from './screens/CameraScreen';
 
 export default class App extends React.Component {
   state = {
@@ -21,7 +23,12 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+
+          <HomeScreen />
+          {/* <CameraScreen /> */}
+
+          {/* Uncomment to use app navigator. We're good for now though. */}
+          {/* <AppNavigator /> */}
         </View>
       );
     }
