@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Image,
   Platform,
   ScrollView,
@@ -32,6 +33,18 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
+          <View style={{
+            flex:1, 
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+            }}>
+            <Image 
+            source={ require('../assets/images/stub_image.gif') 
+            }
+            style={styles.testImage} />
+          </View>
+
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
 
@@ -42,7 +55,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+              Hi Larryyy
             </Text>
           </View>
 
@@ -59,6 +72,14 @@ export default class HomeScreen extends React.Component {
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
             <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
           </View>
+        </View>
+
+        <View style={styles.scanButtonContainer}>
+        <Button
+        onPress={this._handleScanButtonPressed}
+        style={styles.scanButton}
+        title="Feed!"
+        />
         </View>
       </View>
     );
@@ -87,6 +108,10 @@ export default class HomeScreen extends React.Component {
     }
   }
 
+  _handleScanButtonPressed = () => {
+
+  }
+
   _handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
   };
@@ -99,9 +124,24 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  scanButtonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 20,
+  },
+  scanButton: {
+    backgroundColor:'#841584'
+  },
+  testImage: {
+    height: 100
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   developmentModeText: {
     marginBottom: 20,
