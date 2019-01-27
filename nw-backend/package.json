@@ -1,0 +1,27 @@
+{
+  "name": "nw-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "lli-dev",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/storage": "^1.5.2",
+    "@google-cloud/vision": "^0.14.0",
+    "azure-keyvault": "^3.0.4",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "imagga": "^0.1.2",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.13.9",
+    "morgan": "^1.9.0",
+    "ms-rest-azure": "^2.6.0",
+    "node-restful": "^0.2.6",
+    "request": "^2.83.0"
+  }
+}
