@@ -56,13 +56,14 @@ export default class CameraExample extends React.Component {
             return <Text>No access to camera</Text>;
         } else {
             return (
-                <View style={{ flex: 1 }} onLayout={this._test}>
+                <View style={{ flex: 1 }}>
                     <Camera
                         ref={ref => {
                             this.camera = ref;
                         }}
                         style={{ flex: 1 }}
                         type={this.state.type}
+                        onCameraReady={ () => { console.log("Camera Ready!")} }
                         barCodeScannerSettings={ this.barcodeTypes }
                         onBarCodeScanned={ this._handleBarCodeRead }
                     >
