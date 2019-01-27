@@ -13,42 +13,24 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import CameraScreen from './CameraScreen';
 
-export default class SuccessPage extends React.Component {
+export default class HomeScreen extends React.Component {
   state = {
-    isModalVisible: false,
-    animation: null,
+    isModalVisible: false
   };
-
-  componentWillMount() {
-    this._playAnimation();
-  }
 
   render() {
     return (
-      <View>
-    <View style={styles.animationContainer}>
-        {this.state.animation &&
-          <Lottie
-            ref={animation => {
-              this.animation = animation;
-            }}
-            style={{
-              width: 400,
-              height: 400,
-              backgroundColor: '#eee',
-            }}
-            source={this.state.animation}
-          />}
-        <View style={styles.buttonContainer}>
-          <Button title="Restart Animation" onPress={this._playAnimation} />
-        </View>
-      </View>
-
-      
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-          
+            <Image
+              source={
+                __DEV__
+                  ? require('../assets/images/robot-dev.png')
+                  : require('../assets/images/robot-prod.png')
+              }
+              style={styles.welcomeImage}
+            />
           </View>
 
           {/* <View style={{
@@ -63,7 +45,25 @@ export default class SuccessPage extends React.Component {
             style={styles.testImage} />
           </View> */}
 
-          
+          <View style={styles.getStartedContainer}>
+            {this._maybeRenderDevelopmentModeWarning()}
+
+            <Text style={styles.getStartedText}>Get started by opening</Text>
+
+            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+            </View>
+
+            <Text style={styles.getStartedText}>
+              Hi Larryy
+            </Text>
+          </View>
+
+          <View style={styles.helpContainer}>
+            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
+              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
 
         <View style={styles.scanButtonContainer}>
@@ -75,7 +75,6 @@ export default class SuccessPage extends React.Component {
         </View>
 
         <Modal isVisible={this.state.isModalVisible}>
-
           <View style={styles.scanModalContainer}>
             <View style={styles.scanModalTopBar}>
               <TouchableOpacity onPress={this._handleModalCancelButtonPressed}>
@@ -89,7 +88,6 @@ export default class SuccessPage extends React.Component {
           </View>
         </Modal>
 
-      </View>
       </View>
     );
   }
@@ -117,12 +115,16 @@ export default class SuccessPage extends React.Component {
     }
   }
 
-  _handleScanButtonPressed = () => {
+  _toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   }
 
+  _handleScanButtonPressed = () => {
+    this._toggleModal();
+  }
+
   _handleModalCancelButtonPressed = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this._toggleModal();
   }
 
   _handleLearnMorePress = () => {
@@ -134,41 +136,9 @@ export default class SuccessPage extends React.Component {
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
     );
   };
-  _playAnimation = () => {
-    if (!this.state.animation) {
-      this._loadAnimationAsync();
-    } else {
-      this.animation.reset();
-      this.animation.play();
-    }
-  };
-
-  _loadAnimationAsync = async () => {
-    let result = await fetch(
-      'https://cdn.rawgit.com/airbnb/lottie-react-native/635163550b9689529bfffb77e489e4174516f1c0/example/animations/Watermelon.json'
-    )
-      .then(data => {
-        return data.json();
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    this.setState({ animation: result }, this._playAnimation);
-  };
 }
 
 const styles = StyleSheet.create({
-  animationContainer: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-
-  buttonContainer: {
-    paddingTop: 20,
-  },
-
   scanButtonContainer: {
     position: 'absolute',
     bottom: 0,
