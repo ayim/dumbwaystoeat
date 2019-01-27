@@ -27,7 +27,7 @@ export default class CameraExample extends React.Component {
               style={{
                 flex: 1,
                 backgroundColor: 'transparent',
-                flexDirection: 'row',
+                flexDirection: 'row'
               }}>
               <TouchableOpacity
                 style={{
