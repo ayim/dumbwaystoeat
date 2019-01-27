@@ -76,11 +76,15 @@ export default class HomeScreen extends React.Component {
 
         <Modal isVisible={this.state.isModalVisible}>
           <View style={styles.scanModalContainer}>
-            <Text>Hello!</Text>
-            <TouchableOpacity onPress={this._handleModalCancelButtonPressed}>
-              <Text>Hide me!</Text>
-            <CameraScreen />
-            </TouchableOpacity>
+            <View style={styles.scanModalTopBar}>
+              <TouchableOpacity onPress={this._handleModalCancelButtonPressed}>
+                <Image 
+                source={ require('../assets/images/baseline_close_black_48dp.png') }
+                style={ styles.scanModalCancelButton } />
+              </TouchableOpacity>
+              <Text style={styles.scanModalTopBarText}>SCAN</Text>
+            </View>
+            <CameraScreen style={{flex: 5}}/>
           </View>
         </Modal>
 
@@ -154,11 +158,25 @@ const styles = StyleSheet.create({
   },
   scanModalContainer: {
     backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)'
+    flex: 1,
+    borderRadius: 15,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden'
+  },
+  scanModalTopBar: {
+    height: 60,
+    padding: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  scanModalTopBarText: {
+    fontSize: 20,
+    marginLeft: 20
+  },
+  scanModalCancelButton: {
+    marginLeft: 10,
+    width: 30,
+    height: 30
   },
   testImage: {
     height: 100
