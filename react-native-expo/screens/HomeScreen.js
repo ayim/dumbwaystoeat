@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Image,
   Platform,
   ScrollView,
@@ -9,13 +8,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Modal from "react-native-modal";
 import { WebBrowser } from 'expo';
-
 import { MonoText } from '../components/StyledText';
+import CameraScreen from './CameraScreen';
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
+  state = {
+    isModalVisible: false
   };
 
   render() {
@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
-          <View style={{
+          {/* <View style={{
             flex:1, 
             flexDirection: 'column',
             justifyContent: 'center',
@@ -43,7 +43,7 @@ export default class HomeScreen extends React.Component {
             source={ require('../assets/images/stub_image.gif') 
             }
             style={styles.testImage} />
-          </View>
+          </View> */}
 
           <View style={styles.getStartedContainer}>
             {this._maybeRenderDevelopmentModeWarning()}
@@ -66,21 +66,24 @@ export default class HomeScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
-          </View>
-        </View>
-
         <View style={styles.scanButtonContainer}>
-        <Button
-        onPress={this._handleScanButtonPressed}
-        style={styles.scanButton}
-        title="Feed!"
-        />
+        <TouchableOpacity onPress={this._handleScanButtonPressed}>
+              <View style = {styles.scanButtonView}>
+                    <Text style = {styles.scanButtonText}>FEED ME!</Text>
+              </View>
+        </TouchableOpacity>
         </View>
+
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.scanModalContainer}>
+            <Text>Hello!</Text>
+            <TouchableOpacity onPress={this._handleModalCancelButtonPressed}>
+              <Text>Hide me!</Text>
+            <CameraScreen />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+
       </View>
     );
   }
@@ -109,7 +112,11 @@ export default class HomeScreen extends React.Component {
   }
 
   _handleScanButtonPressed = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  }
 
+  _handleModalCancelButtonPressed = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
   }
 
   _handleLearnMorePress = () => {
@@ -130,11 +137,28 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    paddingVertical: 20
+    // padding: 20,
   },
-  scanButton: {
-    backgroundColor:'#841584'
+  scanButtonView: {
+    width: 200,
+    height: 60,
+    backgroundColor:'#80cbc4',
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    borderRadius: 12
+  },
+  scanButtonText: {
+    fontSize: 16,
+    color: '#ffffff'
+  },
+  scanModalContainer: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)'
   },
   testImage: {
     height: 100
