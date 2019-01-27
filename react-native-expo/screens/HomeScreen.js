@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
             </View>
 
             <Text style={styles.getStartedText}>
-              Hi Larryyy
+              Hi Larryy
             </Text>
           </View>
 
@@ -115,12 +115,16 @@ export default class HomeScreen extends React.Component {
     }
   }
 
-  _handleScanButtonPressed = () => {
+  _toggleModal = () => {
     this.setState({ isModalVisible: !this.state.isModalVisible });
   }
 
+  _handleScanButtonPressed = () => {
+    this._toggleModal();
+  }
+
   _handleModalCancelButtonPressed = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this._toggleModal();
   }
 
   _handleLearnMorePress = () => {
