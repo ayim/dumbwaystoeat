@@ -163,6 +163,8 @@ const styles = StyleSheet.create({
   scanModalContainer: {
     backgroundColor: 'white',
     flex: 1,
+    marginTop: 30,
+    marginBottom: 15,
     borderRadius: 15,
     borderColor: 'rgba(0, 0, 0, 0.1)',
     overflow: 'hidden'
